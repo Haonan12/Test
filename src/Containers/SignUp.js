@@ -85,11 +85,9 @@ export default function SignUp({ setLoggedIn }) {
   const handleSubmit = async e => {
     e.preventDefault();
     controller.signUp(username, password, email).then(data => {
-      if (data.status === 'ok') {
         setMessage("Sign Up Success")
-      }
-      else
-        setMessage("Sign Up Failed")
+      // else
+      //   setMessage("Sign Up Failed")
     });
 
   };

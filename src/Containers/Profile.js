@@ -12,9 +12,10 @@ import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 
-export default function Profile({ ...props } ){
-  const classes = useStyles();
-  const history = useHistory();
+export default function Profile(userInfo ){
+  // const classes = useStyles();
+  // const history = useHistory();
+  console.log(userInfo);
 
 
   const [selectedRecipe, setSelectedRecipe] = useState(null);

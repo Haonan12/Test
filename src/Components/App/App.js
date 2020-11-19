@@ -45,7 +45,7 @@ const theme = createMuiTheme({
 });
 
 const App = (signIn) => {
-  const [userInfo, setUserInfo] = useState("")
+  const [userInfo, setUserInfo] = useState("123")
 
   return (
     <React.Fragment>
@@ -55,9 +55,9 @@ const App = (signIn) => {
         <Header/>
 
         <Switch>
-          <Route path="/SignIn" exact component={SignIn} appProps={{ setUserInfo }} />
+          <Route path="/SignIn" exact component={SignIn} setUserInfo={ setUserInfo } />
           <Route path="/SignUp" exact component={SignUp}/>
-          <Route path="/Profile" exact component={Profile} appProps={{ userInfo }}/>
+          <Route path="/Profile" exact component={Profile} userInfo={ userInfo }/>
           <Route path="/Recipes" exact component={Recipes}/>
           <Route path="/Recipes/:id" exact component={ExpendedRecipeCard}/>
           <Route path="/Menu" exact component={Menu}/>

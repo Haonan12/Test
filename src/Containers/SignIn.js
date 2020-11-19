@@ -42,13 +42,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function SignIn( ) {
+export default function SignIn( appProps) {
   const classes = useStyles();
   const history = useHistory();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
 
+  console.log(appProps);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -72,13 +73,10 @@ export default function SignIn( ) {
   const handleSubmit = async e => {
     e.preventDefault();
     controller.signIn(username, password).then(data => {
-      if (data.status === 'ok') {
-        setLoggedIn(true);
+
         history.push({
           pathname: `/Profile`,
         });
-
-      }
 
     });
     setMessage('Login Failed')
