@@ -4,12 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import ReactPlayer from "react-player";
 import { useLocation } from 'react-router-dom';
 
-import TabPanel from "./TabPanel";
-import RecipeBasicInfo from './RecipeComponents/RecipeBasicInfo';
-import TagList from './RecipeComponents/TagList';
-import NewTag from './RecipeComponents/NewTag';
-import IngredientList from './RecipeComponents/IngredientList';
-import MethodList from './RecipeComponents/MethodList';
+import TagList from './TagList';
+import IngredientList from './IngredientList';
 // import UploadButton from './UploadButton';
 
 import Card from '@material-ui/core/Card';
@@ -18,12 +14,16 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-import RecipeDefault from "./RecipeDefault.jpg";
+import InputBase from "@material-ui/core/InputBase/InputBase";
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles(theme=>({
   card:{
-    maxWidth: theme.breakpoints.values.sm,
-    margin: "9px auto"
+    maxWidth: "700px",
+    margin: "9px auto",
+    marginTop:'100px',
+    marginBottom:'50px'
   },
   content:{
     paddingTop: 0,
@@ -35,9 +35,39 @@ const useStyles = makeStyles(theme=>({
   uploadBtn: {
     position: "absolute",
     zIndex: "1",
-  }
+  },
+  methodText: {
+    width: "100%",
+  },
+  input: {
+    margin: "0 6px",
+    padding: "4px 0",
+    color: "#000",
+    fontSize: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 }));
 
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
 
 export default function ExpendedRecipeCard ({ history }){
   const location = useLocation();
@@ -66,12 +96,20 @@ export default function ExpendedRecipeCard ({ history }){
       {/*    <UploadButton handleFileChange={handleFileChange}/>*/}
       {/*  </div>*/}
       {/*}*/}
+
       <CardMedia
         className={classes.media}
-        image={attachment ? attachment :RecipeDefault}
+        image={attachment}
         title="Recipe Image"
       />
-      <RecipeBasicInfo recipeData={recipe}/>
+      <InputBase
+        disabled={true}
+        className={classes.input}
+        name="title"
+        value={recipe.title}
+        placeholder="Name"
+      />
+      <br/>
       <TagList recipeData={recipe}/>
       <CardContent className={classes.content}>
         <Tabs centered value={tabValue} onChange={handleTabChange} className={classes.tabs}>
@@ -83,7 +121,12 @@ export default function ExpendedRecipeCard ({ history }){
           <IngredientList recipeData={recipe}/>
         </TabPanel>
         <TabPanel value={tabValue} index={1}>
-          <MethodList recipeData={recipe} />
+          <InputBase
+            multiline
+            value={recipe.instructions}
+            className={classes.methodText}
+            placeholder="Step"
+          />
         </TabPanel>
         <TabPanel value={tabValue} index={2}>
           <ReactPlayer width="30ptx"

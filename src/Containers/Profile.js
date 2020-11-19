@@ -23,4 +23,11 @@ export default function Profile({ ...props } ){
   const [fabValue, setFabValue] = useState(0);
   const [searchedRecipe, setSearchedRecipe] = React.useState([]);
   const [searchTxt, setSearchTxt] = React.useState('')
+  const getUserProfile = () => {
+
+  }
+  return(
+    <Container style={{marginTop:'100px', marginBottom:'50px'}}>
+    </Container>
+  )
 }

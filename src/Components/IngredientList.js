@@ -31,7 +31,6 @@ const useStyles = makeStyles(theme =>({
 export default ({recipeData, setRecipeData, ...props}) => {
   const classes=useStyles();
 
-  const isDisabled=!props.editable;
 
   const changeIngredient = (e,i) => {
     let x = [...recipeData.ingredients];
@@ -41,28 +40,10 @@ export default ({recipeData, setRecipeData, ...props}) => {
     setRecipeData(y);
   }
 
-  const removeLine = (e,i) => {
-    let y = {...recipeData};
-    y.ingredients.splice(i,1);
-    setRecipeData(y);
-  }
-
-  const newLine = e => {
-    let x = [...recipeData.ingredients];
-    x.push({
-      item:"",
-      measurement:"",
-      quantity:""
-    });
-    let y = {...recipeData}
-    y.ingredients = x;
-    setRecipeData(y);
-  }
 
   const ingredients = recipeData.ingredients.map((ingredient,i)=>(
     <div className={classes.ingredientLine} key={['ingredient', i].join('_')}>
       <InputBase
-        disabled={isDisabled}
         onChange={(e)=>changeIngredient(e,i)}
         name="item"
         value={ingredient.item}
@@ -71,33 +52,23 @@ export default ({recipeData, setRecipeData, ...props}) => {
 
       />
       <InputBase
-        disabled={isDisabled}
         onChange={(e)=>changeIngredient(e,i)}
         name="quantity"
         value={ingredient.quantity}
         placeholder="0"
       />
       <InputBase
-        disabled={isDisabled}
         onChange={(e)=>changeIngredient(e,i)}
         name="measurement"
         value={ingredient.measurement}
         placeholder="Meas"
       />
-      {!isDisabled&&
-      <button className={classes.deleteBtn} onClick={(e)=>removeLine(e,i)}>
-        x
-      </button>}
     </div>
   ));
 
   return(
     <ul className={classes.ingredientList}>
       {ingredients}
-      {!isDisabled
-        &&<Button onClick={newLine}>
-          New Line
-        </Button>}
     </ul>
   );
 }

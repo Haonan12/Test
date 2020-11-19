@@ -6,8 +6,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom";
 // import { Auth } from "aws-amplify";
 
+import logo from '../Data/Tetrahedron.png'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import {AppNavbarBrand} from '@coreui/react';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -141,7 +143,6 @@ export default ({ appProps }) => {
     }
   });
 
-  // const pageList = ['Recipes', 'Menu', 'Pantry', 'Shopping'];
   const pageList = ['Profile', 'Recipes', 'Menu', 'Ingredient'];
 
   const toggleDrawer = event => {
@@ -160,48 +161,24 @@ export default ({ appProps }) => {
     history.push(`/${pageList[newValue]}`)
   };
 
-  // async function handleLogout() {
-  //   toggleProfilePopover();
-  //   await Auth.signOut();
-  //   appProps.userHasAuthenticated(false);
-  //   history.push("/SignIn");
-  // }
-
-  const FullList = () => (
-    <div
-      className={classes.fullList}
-      role="presentation"
-      onClick={toggleDrawer}
-      onKeyDown={toggleDrawer}
-    >
-      <List>
-        {pageList.map((text, index) => (
-          <ListItem key={text} button disabled={false/*index > 0*/} >
-            <RouterLink to={`/${text}`} className={classes.routerLink}>
-              <ListItemText primary={text} />
-            </RouterLink>
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
-
-  const UnAuthProfile = () => (
-    <Paper>
-      <List>
-        <RouterLink onClick={toggleProfilePopover} key="SignIn" to="/SignIn" className={classes.routerLink}>
-          <ListItem button>
-            <ListItemText primary="Sign In" />
-          </ListItem>
-        </RouterLink>
-        <RouterLink onClick={toggleProfilePopover} key="SignUp" to="/SignUp" className={classes.routerLink}>
-          <ListItem button>
-            <ListItemText primary="Sign Up" />
-          </ListItem>
-        </RouterLink>
-      </List>
-    </Paper>
-  )
+  // const FullList = () => (
+  //   <div
+  //     className={classes.fullList}
+  //     role="presentation"
+  //     // onClick={toggleDrawer}
+  //     // onKeyDown={toggleDrawer}
+  //   >
+  //     <List>
+  //       {pageList.map((text, index) => (
+  //         <ListItem key={text} button disabled={false/*index > 0*/} >
+  //           <RouterLink to={`/${text}`} className={classes.routerLink}>
+  //             <ListItemText primary={text} />
+  //           </RouterLink>
+  //         </ListItem>
+  //       ))}
+  //     </List>
+  //   </div>
+  // );
 
   // const AuthProfile = () => (
   //   <Paper>
@@ -230,36 +207,32 @@ export default ({ appProps }) => {
   //   </Paper>
   // );
 
-  console.log(value);
   return (
     <div className="Header">
       <AppBar position="fixed" className={clsx(classes.appBar, drawer && classes.appBarShift)}>
         <Toolbar className={classes.root}>
-          <NavLink to='/' style={{textDecoration:'none', color:'white'}}>
-            <Typography variant="h6">Tetrahedron</Typography>
-          </NavLink>
-          <Hidden mdUp>
-            <IconButton edge="start" color="inherit" aria-label="menu" className={classes.navigationBtn} onClick={toggleDrawer}>
-              <ExpandLessIcon />
-            </IconButton>
-          </Hidden>
-          <Hidden smDown>
-            <Tabs value={value} centered onChange={handleChange} className={classes.navigationBar} aria-label="simple tabs example">
-              <Tab label="Profile"/>
-              <Tab label="Recipes"/>
-              <Tab label="Menu" />
-              <Tab label="Ingredient" />
-              {/*<Tab label="Shopping" />*/}
-            </Tabs>
-          </Hidden>
-          <IconButton onClick={toggleProfilePopover} className={classes.profileBtn} edge="start" color="inherit" aria-label="menu">
-            <AccountCircleIcon />
-          </IconButton>
+          {/*<NavLink to='/' style={{textDecoration:'none', color:'white'}}>*/}
+          {/*  <Typography variant="h6">Tetrahedron</Typography>*/}
+          {/*</NavLink>*/}
+          {/*<AppNavbarBrand*/}
+          {/*  full={{src: logo, height: 120}}*/}
+          {/*/>*/}
+
+          <Tabs value={value} centered onChange={handleChange} className={classes.navigationBar} aria-label="simple tabs example">
+            <Tab label="Profile"/>
+            <Tab label="Recipes"/>
+            <Tab label="Menu" />
+            <Tab label="Ingredient" />
+            {/*<Tab label="Shopping" />*/}
+          </Tabs>
+          {/*<IconButton onClick={toggleProfilePopover} className={classes.profileBtn} edge="start" color="inherit" aria-label="menu">*/}
+          {/*  <AccountCircleIcon />*/}
+          {/*</IconButton>*/}
         </Toolbar>
       </AppBar>
-      <Drawer variant="persistent" anchor="top" open={drawer} onClose={toggleDrawer}>
-        <FullList />
-      </Drawer>
+      {/*<Drawer variant="persistent" anchor="top" open={drawer} onClose={toggleDrawer}>*/}
+      {/*  <FullList />*/}
+      {/*</Drawer>*/}
       {/*<Popover*/}
       {/*  onClose={toggleProfilePopover}*/}
       {/*  open={Boolean(profileAnchorEl)}*/}
