@@ -138,7 +138,7 @@ export default ({ appProps }) => {
         setValue(1);
         break;
       default:
-        setValue(1);
+        setValue(0);
         break;
     }
   });

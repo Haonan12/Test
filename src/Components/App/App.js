@@ -13,7 +13,7 @@ import Menu from "../../Containers/Menu";
 import Recipes from "../../Containers/Recipes";
 import ExpendedRecipeCard from "../../Components/ExpandedRecipeCard"
 
-import {withRouter, useHistory, Route, Switch} from "react-router-dom";
+import { Route, withRouter, Redirect, Switch} from "react-router-dom";
 // import AuthenticatedRoute from "../Components/AuthenticatedRoute";
 // import UnauthenticatedRoute from "../Components/UnauthenticatedRoute";
 import Header from "../../Containers/Header";
@@ -45,7 +45,7 @@ const theme = createMuiTheme({
 });
 
 const App = (signIn) => {
-  const [userInfo, setUserInfo] = useState("123")
+  const [userInfo, setUserInfo] = useState(null)
 
   return (
     <React.Fragment>
@@ -55,13 +55,45 @@ const App = (signIn) => {
         <Header/>
 
         <Switch>
-          <Route path="/SignIn" exact component={SignIn} setUserInfo={ setUserInfo } />
+          <Route path="/SignIn" exact
+                 render={props => <SignIn params={{info: setUserInfo}} {...props}/>} />
           <Route path="/SignUp" exact component={SignUp}/>
-          <Route path="/Profile" exact component={Profile} userInfo={ userInfo }/>
-          <Route path="/Recipes" exact component={Recipes}/>
-          <Route path="/Recipes/:id" exact component={ExpendedRecipeCard}/>
-          <Route path="/Menu" exact component={Menu}/>
-          <Route path="/Ingredient" exact component={Ingredient}/>
+          <Route path="/Profile" exact
+                 render={props =>
+                   userInfo
+                     ? <Profile params={{info: userInfo}} {...props}/>
+                     : <Redirect
+                       to={`/SignIn`}
+                     />} />
+          <Route path="/Recipes" exact
+                 render={props =>
+                   userInfo
+                     ? <Recipes {...props}/>
+                     : <Redirect
+                       to={`/SignIn`}
+                     />} />
+          <Route path="/Recipes/:id" exact
+                 render={props =>
+                   userInfo
+                     ? <ExpendedRecipeCard {...props}/>
+                     : <Redirect
+                       to={`/SignIn`}
+                     />} />
+          <Route path="/Menu" exact
+                 render={props =>
+                   userInfo
+                     ? <Menu {...props}/>
+                     : <Redirect
+                       to={`/SignIn`}
+                     />} />
+          <Route path="/Ingredient" exact
+                 render={props =>
+                   userInfo
+                     ? <Ingredient {...props}/>
+                     : <Redirect
+                       to={`/SignIn`}
+                     />} />
+          <Route path="/" exact render={props => <Redirect to={`/SignIn`}/>} />
 
           { /* Finally, catch all unmatched routes */}
           {/* <Route component={NotFound} /> */}

@@ -54,14 +54,14 @@ export default ({recipeData, setRecipeData, ...props}) => {
       <InputBase
         onChange={(e)=>changeIngredient(e,i)}
         name="quantity"
-        value={ingredient.quantity}
-        placeholder="0"
+        value={(ingredient.quantity != 'N/A') ? ingredient.quantity: ""}
+        placeholder=""
       />
       <InputBase
         onChange={(e)=>changeIngredient(e,i)}
         name="measurement"
-        value={ingredient.measurement}
-        placeholder="Meas"
+        value={(ingredient.measurement != 'N/A')? ingredient.measurement : ""}
+        placeholder=""
       />
     </div>
   ));

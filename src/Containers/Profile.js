@@ -11,11 +11,13 @@ import EditIcon from '@material-ui/icons/Edit';
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper/Paper";
 
-export default function Profile(userInfo ){
+export default function Profile({...props}){
   // const classes = useStyles();
   // const history = useHistory();
-  console.log(userInfo);
+  console.log(props);
 
 
   const [selectedRecipe, setSelectedRecipe] = useState(null);
@@ -29,6 +31,15 @@ export default function Profile(userInfo ){
   }
   return(
     <Container style={{marginTop:'100px', marginBottom:'50px'}}>
+      <Typography variant="h4" color="primary.contrastText">
+        Welcome
+      </Typography>
+      <Typography variant="body1" color="textPrimary">
+        {"You user name is " + props.params.info.username}
+      </Typography>
+      {/*<Typography variant="body1" color="textPrimary">*/}
+      {/*  {"You email is" + props.params.info.email}*/}
+      {/*</Typography>*/}
     </Container>
   )
 }

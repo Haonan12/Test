@@ -19,9 +19,11 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(2),
     marginLeft: theme.spacing(2),
     width: '100%',
+    color: 'secondary'
   },
   ingredient_grid: {
     width: '90%',
+    color: 'secondary'
   },
   ingredient_txt: {
     marginRight: theme.spacing(1),
@@ -61,23 +63,6 @@ export default ({ }) => {
   const renderIngredient = (ingredient) => {
     return (
       <Container style={{marginTop:'100px', marginBottom:'50px'}}>
-        {/*<div className={classes.search}>*/}
-        {/*  <InputBase*/}
-        {/*    placeholder="Search…"*/}
-        {/*    classes={{*/}
-        {/*      input: classes.inputInput,*/}
-        {/*    }}*/}
-        {/*    onChange = {(e) => handleSearchText(e)}*/}
-        {/*  />*/}
-        {/*  <Button*/}
-        {/*    onClick={handleSearch}*/}
-        {/*    variant="contained"*/}
-        {/*    color="secondary"*/}
-        {/*    className={classes.button}*/}
-        {/*  >*/}
-        {/*    Search*/}
-        {/*  </Button>*/}
-        {/*</div>*/}
         <Grid container spacing={2}>
           <Grid item className='ingredient_list'>
             <Paper className='ingredient_txt'>
